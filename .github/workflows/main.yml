@@ -44,7 +44,7 @@ jobs:
           NO_SKIP: true
         run: |
          wget -O ru-bundle.lst https://github.com/legiz-ru/sb-rule-sets/raw/main/ru-bundle.lst
-         echo "payload:" > ru-bundle.yaml && cat ru-bundle.lst | sed 's/^/- "+.&"/' >> ru-bundle.yaml && mihomo convert-ruleset domain yaml ru-bundle.yaml ru-bundle.mrs
+         echo "payload:" > ru-bundle.yaml && cat ru-bundle.lst | sed 's/^/- "+.&"/' >> ru-bundle.yaml
          
       - name: Delete temp file
         run: |
