@@ -56,7 +56,7 @@ jobs:
         run: |
          mkdir -p re-filter
          wget -O re-filter-ip.lst https://github.com/1andrevich/Re-filter-lists/raw/main/ipsum.lst
-         echo "payload:" > ip-rule.yaml && sed "s/^/- '&/'" re-filter-ip.lst >> ip-rule.yaml
+         echo "payload:" > ip-rule.yaml && sed "s/.*/- '&'/g" re-filter-ip.lst >> ip-rule.yaml
          mihomo convert-ruleset ipcidr yaml ip-rule.yaml ip-rule.mrs
          wget -O ip-rule.list https://github.com/1andrevich/Re-filter-lists/raw/main/ipsum.lst
          mv ip-rule.yaml ip-rule.mrs ip-rule.list re-filter/
