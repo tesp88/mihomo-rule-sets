@@ -26,7 +26,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt update
-          sudo apt install -y curl wget git jq cat sed
+          sudo apt install -y curl wget git jq
           bash <(curl -fsSL https://sing-box.app/deb-install.sh)
          
       - name: Download and install Mihomo
