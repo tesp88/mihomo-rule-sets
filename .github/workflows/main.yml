@@ -48,11 +48,27 @@ jobs:
          echo "payload:" > rule.yaml && cat ru-bundle.lst | sed "s/.*/- '+.&'/" >> rule.yaml
          mihomo convert-ruleset domain yaml rule.yaml rule.mrs
          sed 's/^/+\./' ru-bundle.lst > rule.list
-         mv rule.yaml rule.mrs rule.list ru-bundle/  
+         mv rule.yaml rule.mrs rule.list ru-bundle/
+
+      - name: Generate re-filter
+        env:
+          NO_SKIP: true
+        run: |
+         mkdir -p re-filter
+         wget -O re-filter-ip.lst https://github.com/1andrevich/Re-filter-lists/raw/main/ipsum.lst
+         echo "payload:" > ip-rule.yaml && sed "s/^/- '&/'" re-filter-ip.lst >> ip-rule.yaml
+         mihomo convert-ruleset ipcidr yaml ip-rule.yaml ip-rule.mrs
+         wget -O ip-rule.list https://github.com/1andrevich/Re-filter-lists/raw/main/ipsum.lst
+         mv ip-rule.yaml ip-rule.mrs ip-rule.list re-filter/
+         wget -O re-filter-domain.lst https://github.com/1andrevich/Re-filter-lists/raw/main/domains_all.lst
+         echo "payload:" > domain-rule.yaml && sed "s/^/- '&/'" re-filter-domain.lst >> domain-rule.yaml
+         mihomo convert-ruleset domain yaml domain-rule.yaml domain-rule.mrs
+         wget -O domain-rule.list https://github.com/1andrevich/Re-filter-lists/raw/main/domains_all.lst
+         mv domain-rule.yaml domain-rule.mrs domain-rule.list re-filter/
          
       - name: Delete temp file
         run: |
-          rm ru-bundle.lst | rm mihomo-linux-amd64-alpha.deb
+          rm ru-bundle.lst | rm re-filter-ip.lst | rm re-filter-domain.lst | rm mihomo-linux-amd64-alpha.deb
           
       - name: Get current date
         id: date
