@@ -43,14 +43,15 @@ jobs:
         env:
           NO_SKIP: true
         run: |
-         mkdir ru-bundle
-         wget -O /ru-bundle/temp.lst https://github.com/legiz-ru/sb-rule-sets/raw/main/ru-bundle.lst
-         echo "payload:" > /ru-bundle/rule.yaml && cat /ru-bundle/temp.lst | sed "s/.*/- '+.&'/" >> /ru-bundle/rule.yaml
-         mihomo convert-ruleset domain yaml /ru-bundle/rule.yaml /ru-bundle/rule.mrs
+         mkdir -p ru-bundle
+         wget -O ru-bundle.lst https://github.com/legiz-ru/sb-rule-sets/raw/main/ru-bundle.lst
+         echo "payload:" > rule.yaml && cat ru-bundle.lst | sed "s/.*/- '+.&'/" >> rule.yaml
+         mihomo convert-ruleset domain yaml rule.yaml rule.mrs
+         mv rule.yaml rule.mrs ru-bundle/  
          
       - name: Delete temp file
         run: |
-          rm /ru-bundle/temp.lst | rm mihomo-linux-amd64-alpha.deb
+          rm ru-bundle.lst | rm mihomo-linux-amd64-alpha.deb
           
       - name: Get current date
         id: date
