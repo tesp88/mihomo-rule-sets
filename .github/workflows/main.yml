@@ -2,7 +2,7 @@ name: Generate mihomo
 
 on:
   schedule:
-    - cron: "30 22 * * *" # 6:30 AM UTC+8
+    - cron: "30 4 * * *" 
   workflow_dispatch:
   
 permissions:
