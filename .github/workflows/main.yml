@@ -27,7 +27,6 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y curl wget git jq
-          bash <(curl -fsSL https://sing-box.app/deb-install.sh)
          
       - name: Download and install Mihomo
         run: |
@@ -60,10 +59,26 @@ jobs:
          wget -O re-filter-domain.text https://github.com/1andrevich/Re-filter-lists/raw/main/domains_all.lst
          mihomo convert-ruleset domain text re-filter-domain.text domain-rule.mrs
          mv domain-rule.mrs ip-rule.mrs re-filter/
+
+      - name: Generate oisd
+        env:
+          NO_SKIP: true
+        run: |
+         mkdir -p oisd
+         wget -O oisd_big.txt https://github.com/sjhgvr/oisd/raw/main/domainswild2_big.txt
+         wget -O oisd_nsfw.txt https://github.com/sjhgvr/oisd/raw/main/domainswild2_nsfw.txt
+         wget -O oisd_nsfw_small.txt https://github.com/sjhgvr/oisd/raw/main/domainswild2_nsfw_small.txt
+         wget -O oisd_small.txt https://github.com/sjhgvr/oisd/raw/main/domainswild2_small.txt
+         mihomo convert-ruleset domain text oisd_big.txt big.mrs
+         mihomo convert-ruleset domain text oisd_nsfw.txt nsfw.mrs
+         mihomo convert-ruleset domain text oisd_nsfw_small.txt nsfw_small.mrs
+         mihomo convert-ruleset domain text oisd_small.txt small.mrs
+         mv big.mrs nsfw.mrs nsfw_small.mrs small.mrs oisd/
          
       - name: Delete temp file
         run: |
           rm ru-bundle.lst | rm re-filter-ip.text | rm re-filter-domain.text | rm mihomo-linux-amd64-alpha.deb
+          rm oisd_big.txt | rm oisd_nsfw.txt | rm oisd_nsfw_small.txt | rm oisd_small.txt
           
       - name: Get current date
         id: date
