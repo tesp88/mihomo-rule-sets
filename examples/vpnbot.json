@@ -119,7 +119,7 @@
             "type": "http",
             "behavior": "domain",
             "format": "mrs",
-            "url": "https://github.com/legiz-ru/mihomo-rule-sets/blob/main/oisd/small.mrs",
+            "url": "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/small.mrs",
             "path": "./oisd/small.mrs",
             "interval": 86400
         },
@@ -127,7 +127,7 @@
             "type": "http",
             "behavior": "domain",
             "format": "mrs",
-            "url": "https://github.com/legiz-ru/mihomo-rule-sets/blob/main/oisd/big.mrs",
+            "url": "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs",
             "path": "./oisd/big.mrs",
             "interval": 86400
         },
@@ -135,7 +135,7 @@
             "type": "http",
             "behavior": "domain",
             "format": "mrs",
-            "url": "https://github.com/legiz-ru/mihomo-rule-sets/blob/main/oisd/nsfw_small.mrs",
+            "url": "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/nsfw_small.mrs",
             "path": "./oisd/nsfw_small.mrs",
             "interval": 86400
         },
@@ -143,7 +143,7 @@
             "type": "http",
             "behavior": "domain",
             "format": "mrs",
-            "url": "https://github.com/legiz-ru/mihomo-rule-sets/blob/main/oisd/nsfw.mrs",
+            "url": "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/nsfw.mrs",
             "path": "./oisd/nsfw_big.mrs",
             "interval": 86400
         }
