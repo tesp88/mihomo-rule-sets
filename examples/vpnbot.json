@@ -90,7 +90,15 @@
             ]
         }
     ],
-    "rule-providers": {
+    "rule-providers": 
+        "ru-bundle": {
+            "type": "http",
+            "behavior": "domain",
+            "format": "mrs",
+            "url": "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs",
+            "path": "./ru-bundle/rule.mrs",
+            "interval": 86400
+        },
         "refilter_domains": {
             "type": "http",
             "behavior": "domain",
@@ -176,6 +184,11 @@
             "list": "~package~",
             "action": "PROXY"
         },
+        [
+            "RULE-SET",
+            "ru-bundle",
+            "PROXY"
+        ],
         [
             "RULE-SET",
             "refilter_domains",
