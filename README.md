@@ -33,7 +33,7 @@ proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bund
 </details>
 </details>
 
-## oisd
+## oisd (adblocklists + nsfw)
 include all list from [oisd](oisd.nl)
 <details>
   <summary>how to add</summary>
