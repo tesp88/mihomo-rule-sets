@@ -82,15 +82,17 @@ jobs:
          mkdir -p other
          wget -O torrent-websites.txt https://github.com/sakib-m/Pi-hole-Torrent-Blocklist/raw/main/all-torrent-websites.txt
          wget -O torrent-trackers.txt https://github.com/sakib-m/Pi-hole-Torrent-Blocklist/raw/main/all-torrent-trackres.txt
+         wget -O torrent-clients.json https://github.com/legiz-ru/sb-rule-sets/raw/main/torrent-clients.json
          mihomo convert-ruleset domain text torrent-websites.txt torrent-websites.mrs
          mihomo convert-ruleset domain text torrent-trackers.txt torrent-trackers.mrs
-         mv torrent-websites.mrs torrent-trackers.mrs other/
+         jq -r '.rules[] | .rules[] | .process_name[], .package_name[]' torrent-clients.json | awk '{print "- PROCESS-NAME," $0}' > torrent-clients.yaml
+         mv torrent-websites.mrs torrent-trackers.mrs torrent-clients.yaml other/
          
       - name: Delete temp file
         run: |
           rm ru-bundle.lst | rm re-filter-ip.text | rm re-filter-domain.text | rm mihomo-linux-amd64-alpha.deb
           rm oisd_big.txt | rm oisd_nsfw.txt | rm oisd_nsfw_small.txt | rm oisd_small.txt
-          rm torrent-websites.txt | rm torrent-trackers.txt
+          rm torrent-websites.txt | rm torrent-trackers.txt | rm torrent-clients.json
           
       - name: Get current date
         id: date
