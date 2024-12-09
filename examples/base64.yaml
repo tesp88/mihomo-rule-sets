@@ -47,7 +47,7 @@ proxy-groups:
 proxy-providers:
   base64:
     type: http
-    url: "https://your.domain/34567/sub/link" # URL BASE64 
+    url: "https://your.domain/sub/link" # URL BASE64 
     path: ./proxy_providers/base64.yml
     interval: 3600
     health-check:
