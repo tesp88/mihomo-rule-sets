@@ -1,0 +1,59 @@
+- PROCESS-NAME,uTorrent.exe
+- PROCESS-NAME,BitTorrent.exe
+- PROCESS-NAME,utweb.exe
+- PROCESS-NAME,btweb.exe
+- PROCESS-NAME,utorrentie.exe
+- PROCESS-NAME,bittorrentie.exe
+- PROCESS-NAME,qbittorrent.exe
+- PROCESS-NAME,deluge.exe
+- PROCESS-NAME,Azureus.exe
+- PROCESS-NAME,tixati.exe
+- PROCESS-NAME,transmission-qt.exe
+- PROCESS-NAME,transmission-daemon.exe
+- PROCESS-NAME,WebTorrent.exe
+- PROCESS-NAME,PicoTorrent.exe
+- PROCESS-NAME,FrostWire.exe
+- PROCESS-NAME,Tribler.exe
+- PROCESS-NAME,BitComet.exe
+- PROCESS-NAME,mediaget.exe
+- PROCESS-NAME,mediaget_crashpad_handler.exe
+- PROCESS-NAME,uFiler.exe
+- PROCESS-NAME,TorrServer-windows-386.exe
+- PROCESS-NAME,TorrServer-windows-amd64.exe
+- PROCESS-NAME,Transmission
+- PROCESS-NAME,qBittorrent
+- PROCESS-NAME,BitTorrent Web
+- PROCESS-NAME,BitTorrent
+- PROCESS-NAME,uTorrent Web
+- PROCESS-NAME,uTorrent
+- PROCESS-NAME,Folx
+- PROCESS-NAME,Deluge
+- PROCESS-NAME,Vuze
+- PROCESS-NAME,FrostWire
+- PROCESS-NAME,BiglyBT
+- PROCESS-NAME,BitLord
+- PROCESS-NAME,BitComet
+- PROCESS-NAME,bitlord
+- PROCESS-NAME,tribler
+- PROCESS-NAME,WebTorrent
+- PROCESS-NAME,WebTorrent Helper
+- PROCESS-NAME,WebTorrent Helper (GPU)
+- PROCESS-NAME,WebTorrent Helper (Renderer)
+- PROCESS-NAME,mediaget
+- PROCESS-NAME,fdm
+- PROCESS-NAME,Free Download Manager
+- PROCESS-NAME,qbittorrent
+- PROCESS-NAME,qbittorrent-nox
+- PROCESS-NAME,transmission-qt
+- PROCESS-NAME,transmission-gtk
+- PROCESS-NAME,transmission-daemon
+- PROCESS-NAME,deluged
+- PROCESS-NAME,deluge-gtk
+- PROCESS-NAME,fragments
+- PROCESS-NAME,tixati
+- PROCESS-NAME,frostwire
+- PROCESS-NAME,vuze
+- PROCESS-NAME,azureus
+- PROCESS-NAME,ktorrent
+- PROCESS-NAME,rtorrent
+- PROCESS-NAME,tribler
