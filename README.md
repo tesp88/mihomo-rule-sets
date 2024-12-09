@@ -27,7 +27,7 @@ rules:
   <summary>add to vpnbot</summary>
   
 ```shell
-PROXY:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/blob/main/ru-bundle/rule.mrs
+proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/blob/main/ru-bundle/rule.mrs
 ```
 
 </details>
@@ -86,22 +86,22 @@ rules:
 **BIG LIST:**
 
 ```shell
-REJECT:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs
+reject:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs
 ```
 **SMALL LIST:**
 
 ```shell
-REJECT:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/small.mrs
+reject:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/small.mrs
 ```
 **NSFW BIG LIST:**
 
 ```shell
-REJECT:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/nsfw.mrs
+reject:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/nsfw.mrs
 ```
 **NSFW SMALL LIST:**
 
 ```shell
-REJECT:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/nsfw_small.mrs
+reject:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/nsfw_small.mrs
 ```
 
 </details>
@@ -142,10 +142,10 @@ rules:
   <summary>add to vpnbot</summary>
   
 ```shell
-REJECT:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/re-filter/domain-rule.mrs
+proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/re-filter/domain-rule.mrs
 ```
 ```shell
-REJECT:ipcidr:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/re-filter/ip-rule.mrs
+proxy:ipcidr:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/re-filter/ip-rule.mrs
 ```
 
 </details>
