@@ -85,7 +85,7 @@ jobs:
          wget -O torrent-clients.json https://github.com/legiz-ru/sb-rule-sets/raw/main/torrent-clients.json
          mihomo convert-ruleset domain text torrent-websites.txt torrent-websites.mrs
          mihomo convert-ruleset domain text torrent-trackers.txt torrent-trackers.mrs
-         jq -r '.rules[] | .rules[] | .process_name[], .package_name[]' torrent-clients.json | awk '{print "- PROCESS-NAME," $0}' > torrent-clients.yaml
+         echo "payload:" > torrent-clients.yaml && jq -r '.rules[] | .rules[] | .process_name[], .package_name[]' torrent-clients.json | awk '{print "  - PROCESS-NAME," $0}' >> torrent-clients.yaml
          mv torrent-websites.mrs torrent-trackers.mrs torrent-clients.yaml other/
          
       - name: Delete temp file
