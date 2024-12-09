@@ -27,7 +27,7 @@ rules:
   <summary>add to vpnbot</summary>
   
 ```shell
-proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/blob/main/ru-bundle/rule.mrs
+proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs
 ```
 
 </details>
