@@ -18,11 +18,6 @@ jobs:
       - name: Pull Changes
         run: git pull
 
-      - name: Set up Node.js (if required)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'  # Adjust if needed
-
       - name: Install Dependencies
         run: |
           sudo apt update
@@ -44,10 +39,20 @@ jobs:
         run: |
          mkdir -p ru-bundle
          wget -O ru-bundle.lst https://github.com/legiz-ru/sb-rule-sets/raw/main/ru-bundle.lst
+         wget -O itdoginfo-inside-russia.lst https://github.com/itdoginfo/allow-domains/raw/main/Russia/inside-raw.lst
+         wget -O antifilter-community.lst https://community.antifilter.download/list/domains.lst
+         wget -O no-russia-hosts.json https://github.com/legiz-ru/sb-rule-sets/raw/main/no-russia-hosts.json
+         jq -r '.rules[].domain_suffix[]' no-russia-hosts.json > no-russia-hosts.lst
          echo "payload:" > rule.yaml && cat ru-bundle.lst | sed "s/.*/- '+.&'/" >> rule.yaml
          mihomo convert-ruleset domain yaml rule.yaml rule.mrs
          sed 's/^/+\./' ru-bundle.lst > rule.list
-         mv rule.yaml rule.mrs rule.list ru-bundle/
+         echo "payload:" > itdoginfo-inside-russia.yaml && cat itdoginfo-inside-russia.lst | sed "s/.*/- '+.&'/" >> itdoginfo-inside-russia.yaml
+         mihomo convert-ruleset domain yaml itdoginfo-inside-russia.yaml itdoginfo-inside-russia.mrs
+         echo "payload:" > antifilter-community.yaml && cat antifilter-community.lst | sed "s/.*/- '+.&'/" >> antifilter-community.yaml
+         mihomo convert-ruleset domain yaml antifilter-community.yaml antifilter-community.mrs
+         echo "payload:" > no-russia-hosts.yaml && cat no-russia-hosts.lst | sed "s/.*/- '+.&'/" >> no-russia-hosts.yaml
+         mihomo convert-ruleset domain yaml no-russia-hosts.yaml no-russia-hosts.mrs
+         mv rule.yaml rule.mrs rule.list itdoginfo-inside-russia.yaml itdoginfo-inside-russia.mrs antifilter-community.yaml antifilter-community.mrs no-russia-hosts.yaml no-russia-hosts.mrs ru-bundle/
 
       - name: Generate re-filter
         env:
@@ -91,6 +96,7 @@ jobs:
       - name: Delete temp file
         run: |
           rm ru-bundle.lst | rm re-filter-ip.text | rm re-filter-domain.text | rm mihomo-linux-amd64-alpha.deb
+          rm itdoginfo-inside-russia.lst | rm antifilter-community.lst | rm no-russia-hosts.json | rm no-russia-hosts.lst
           rm oisd_big.txt | rm oisd_nsfw.txt | rm oisd_nsfw_small.txt | rm oisd_small.txt
           rm torrent-websites.txt | rm torrent-trackers.txt | rm torrent-clients.json
           
