@@ -6,7 +6,7 @@ include: [itdoginfo-inside-russia](https://github.com/itdoginfo/allow-domains/) 
   <summary>how to add</summary>
   
 <details>
-  <summary>binary rule-set .mrs</summary>
+  <summary>.yaml example for binary rule-set .mrs</summary>
   
 ```yaml
 rule-providers:
@@ -39,7 +39,7 @@ include all list from [oisd](oisd.nl)
   <summary>how to add</summary>
   
 <details>
-  <summary>binary rule-set .mrs</summary>
+  <summary>.yaml example for binary rule-set .mrs</summary>
   
 ```yaml
 rule-providers:
@@ -113,7 +113,7 @@ include domain & ip list from [re-filter](https://github.com/1andrevich/Re-filte
   <summary>how to add</summary>
   
 <details>
-  <summary>binary rule-set .mrs</summary>
+  <summary>.yaml example for binary rule-set .mrs</summary>
   
 ```yaml
 rule-providers:
@@ -146,6 +146,123 @@ proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/re-filt
 ```
 ```shell
 proxy:ipcidr:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/re-filter/ip-rule.mrs
+```
+
+</details>
+</details>
+
+## other rule-sets
+<details>
+  <summary>torrent clients, trackers, websites</summary>
+  
+<details>
+  <summary>.yaml example for binary rule-set .mrs</summary>
+  
+```yaml
+rule-providers:
+  torrent-trackers:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
+    path: ./rule-sets/torrent-trackers.mrs
+    interval: 86400
+  torrent-websites:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs
+    path: ./rule-sets/torrent-websites.mrs
+    interval: 86400
+  torrent-clients:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml
+    path: ./rule-sets/torrent-clients.yaml
+    interval: 86400
+rules:
+  - RULE-SET,torrent-clients,DIRECT
+  - RULE-SET,torrent-trackers,DIRECT
+  - RULE-SET,torrent-websites,PROXY
+  - MATCH,DIRECT
+```
+
+</details>
+<details>
+  <summary>add to vpnbot</summary>
+  
+```shell
+DIRECT:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
+```
+
+```shell
+PROXY:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs
+```
+
+```shell
+DIRECT:classical:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml
+```
+
+</details>
+</details>
+
+<details>
+  <summary>lists from ru-bundle (itdoginfo-inside-russia, no-russia-hosts, antifilter-community)</summary>
+  
+<details>
+  <summary>.yaml example for binary rule-set .mrs</summary>
+  
+```yaml
+rule-providers:
+  antifilter-community:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/antifilter-community.mrs
+    path: ./ru-bundle/antifilter-community.mrs
+    interval: 86400
+  no-russia-hosts:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/no-russia-hosts.mrs
+    path: ./ru-bundle/no-russia-hosts.mrs
+    interval: 86400
+  itdoginfo-inside-russia:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/itdoginfo-inside-russia.mrs
+    path: ./ru-bundle/itdoginfo-inside-russia.mrs
+    interval: 86400
+rules:
+  - RULE-SET,itdoginfo-inside-russia,PROXY
+  - RULE-SET,no-russia-hosts,PROXY
+  - RULE-SET,antifilter-community,PROXY
+  - MATCH,DIRECT
+```
+
+</details>
+<details>
+  <summary>add to vpnbot</summary>
+  
+itdoginfo-inside-russia:
+  
+```shell
+proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/itdoginfo-inside-russia.mrs
+```
+
+no-russia-hosts:
+
+```shell
+proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/no-russia-hosts.mrs
+```
+
+antifilter-community:
+
+```shell
+proxy:domain:86400:https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/antifilter-community.mrs
 ```
 
 </details>
