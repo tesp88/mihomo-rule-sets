@@ -100,7 +100,8 @@ jobs:
          mkdir -p other
          wget -O other/vpnbot-v2ray-ru-bundle.json https://github.com/mercurykd/vpnbot/raw/dev/config/v2ray.json
          domains=$(cat ru-bundle.lst | jq -R . | jq -s .) && jq --argjson domains "$domains" '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "~outbound~", "domain": $domains}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > temp.json && mv temp.json other/vpnbot-v2ray-ru-bundle.json
-
+         domains=$(grep -vE '^#|^$' oisd_small.txt | jq -R . | jq -s .) && jq --argjson domains "$domains" '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "block", "domain": $domains}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > other/vpnbot-v2ray-ru-bundle-oisd-small.json
+         
       - name: Delete temp file
         run: |
           rm ru-bundle.lst | rm re-filter-ip.text | rm re-filter-domain.text | rm mihomo-linux-amd64-alpha.deb
