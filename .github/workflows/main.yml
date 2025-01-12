@@ -99,7 +99,7 @@ jobs:
         run: |
          mkdir -p other
          wget -O other/vpnbot-v2ray-ru-bundle.json https://github.com/mercurykd/vpnbot/raw/dev/config/v2ray.json
-         domains=$(cat ru-bundle.lst | jq -R . | jq -s .) && jq --argjson domains "$domains" '(.routing.rules | index(.[] | select(.outboundTag == "block")) + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "~outbound~", "domain": $domains}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > temp.json && mv temp.json other/vpnbot-v2ray-ru-bundle.json
+         domains=$(cat ru-bundle.lst | jq -R . | jq -s .) && jq --argjson domains "$domains" '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "~outbound~", "domain": $domains}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > temp.json && mv temp.json other/vpnbot-v2ray-ru-bundle.json
 
       - name: Delete temp file
         run: |
