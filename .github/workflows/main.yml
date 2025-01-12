@@ -100,13 +100,14 @@ jobs:
          mkdir -p other
          wget -O other/vpnbot-v2ray-ru-bundle.json https://github.com/mercurykd/vpnbot/raw/dev/config/v2ray.json
          domains=$(cat ru-bundle.lst | jq -R . | jq -s .) && jq --argjson domains "$domains" '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "~outbound~", "domain": $domains}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > temp.json && mv temp.json other/vpnbot-v2ray-ru-bundle.json
-         domains=$(grep -vE '^#|^$' oisd_small.txt | jq -R . | jq -s .) && jq --argjson domains "$domains" '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "block", "domain": $domains}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > other/vpnbot-v2ray-ru-bundle-oisd-small.json
-         
+         grep -vE '^#|^$' oisd_small.txt | jq -R . | jq -s . > domains_oisd_small.json
+         jq --slurpfile domains domains_oisd_small.json '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "block", "domain": $domains[0]}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > other/vpnbot-v2ray-ru-bundle-oisd-small.json
+
       - name: Delete temp file
         run: |
           rm ru-bundle.lst | rm re-filter-ip.text | rm re-filter-domain.text | rm mihomo-linux-amd64-alpha.deb
           rm itdoginfo-inside-russia.lst | rm antifilter-community.lst | rm no-russia-hosts.json | rm no-russia-hosts.lst
-          rm oisd_big.txt | rm oisd_nsfw.txt | rm oisd_nsfw_small.txt | rm oisd_small.txt
+          rm oisd_big.txt | rm oisd_nsfw.txt | rm oisd_nsfw_small.txt | rm oisd_small.txt | rm domains_oisd_small.json
           rm torrent-websites.txt | rm torrent-trackers.txt | rm torrent-clients.json
           
       - name: Get current date
