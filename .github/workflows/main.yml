@@ -92,6 +92,14 @@ jobs:
          mihomo convert-ruleset domain text torrent-trackers.txt torrent-trackers.mrs
          echo "payload:" > torrent-clients.yaml && jq -r '.rules[] | .rules[] | .process_name[], .package_name[]' torrent-clients.json | awk '{print "  - PROCESS-NAME," $0}' >> torrent-clients.yaml
          mv torrent-websites.mrs torrent-trackers.mrs torrent-clients.yaml other/
+
+      - name: Generate v2ray templates for vpnbot
+        env:
+          NO_SKIP: true
+        run: |
+         mkdir -p other
+         wget -O other/vpnbot-v2ray-ru-bundle.json https://github.com/mercurykd/vpnbot/raw/dev/config/v2ray.json
+         domains=$(cat ru-bundle.lst | jq -R . | jq -s .) && jq --argjson domains "$domains" '.routing.rules |= (.[:index(.[] | select(.outboundTag == "block")) + 1] + [{"type": "field", "outboundTag": "~outbound~", "domain": $domains}] + .[index(.[] | select(.outboundTag == "block")) + 1:])' other/vpnbot-v2ray-ru-bundle.json > temp.json && mv temp.json other/vpnbot-v2ray-ru-bundle.json
          
       - name: Delete temp file
         run: |
