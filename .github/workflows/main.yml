@@ -101,8 +101,8 @@ jobs:
          wget -O other/vpnbot-v2ray-ru-bundle.json https://github.com/mercurykd/vpnbot/raw/dev/config/v2ray.json
          domains=$(cat ru-bundle.lst | jq -R . | jq -s .) && jq --argjson domains "$domains" '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "~outbound~", "domain": $domains}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > temp.json && mv temp.json other/vpnbot-v2ray-ru-bundle.json
          wget -O category-ads-all.json https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/category-ads-all.json
-         jq --argjson domainsToAdd "$(jq '{domain: (.rules[].domain | map("full:" + .)), domain_suffix: .rules[].domain_suffix, domain_regex: (.rules[].domain_regex | map("regexp:" + .))}' category-ads-all.json)" '(.routing.rules | to_entries | .[] | select(.value.outboundTag == "block").key + 1) as $idx | .routing.rules = .routing.rules[0:$idx] + [{"type": "field", "outboundTag": "block", "domain": ($domainsToAdd.domain + $domainsToAdd.domain_suffix + $domainsToAdd.domain_regex)}] + .routing.rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > other/vpnbot-v2ray-ru-bundle-category-ads-all.json
-         
+         jq '.routing.rules as $rules | ($rules | to_entries | map(select(.value.outboundTag == "block")) | .[0].key + 1) as $idx | .routing.rules = $rules[0:$idx] + [{"type": "field", "outboundTag": "block", "domain": ["geosite:category-ads-all"]}] + $rules[$idx:]' other/vpnbot-v2ray-ru-bundle.json > other/vpnbot-v2ray-ru-bundle-category-ads-all.json
+
       - name: Delete temp file
         run: |
           rm ru-bundle.lst | rm re-filter-ip.text | rm re-filter-domain.text | rm mihomo-linux-amd64-alpha.deb
